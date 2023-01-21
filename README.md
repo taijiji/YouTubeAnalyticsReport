@@ -1,10 +1,7 @@
 # YouTubeAnalyticsReport
-YouTube Analytics Report for Show Int Sponsors
-
 Add your [YouTube API key](https://developers.google.com/youtube/registering_an_application) and your YouTube Channel ID into `.env` file.
 
 ```
-touch .env
 vi .env
 
 API_KEY="XXXXXXXX"
