@@ -1,13 +1,13 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"os"
 	"strings"
 
 	"github.com/joho/godotenv"
+	"golang.org/x/net/context"
 	"google.golang.org/api/option"
 	"google.golang.org/api/youtube/v3"
 )
@@ -22,6 +22,11 @@ func main() {
 
 	ctx := context.Background()
 	service, err := youtube.NewService(ctx, option.WithAPIKey(API_KEY))
+
+	//This is draft code for YouTubeAnalitycs API with Oauth2.0
+	//client := getClient(youtube.YoutubeReadonlyScope)
+	//service, err := youtube.New(client)
+
 	if err != nil {
 		log.Fatalf("Error creating new YouTube service: %v", err)
 	}
@@ -42,7 +47,7 @@ func main() {
 	call_search := service.Search.List([]string{"id", "snippet"}).ChannelId(CHANNEL_ID).Order("date").MaxResults(15)
 	response_search, err_search := call_search.Do()
 	if err_search != nil {
-		log.Fatalf("Error making search API call: %v", err)
+		log.Fatalf("Error making search API call: %v", err_search)
 	}
 	for _, search := range response_search.Items {
 		fmt.Println(strings.Repeat("-", 100))
@@ -51,8 +56,8 @@ func main() {
 		fmt.Println("Uploaded Date: ", strings.Split(search.Snippet.PublishedAt, "T")[0])
 
 		call_video := service.Videos.List([]string{"snippet", "contentDetails", "statistics"}).Id(search.Id.VideoId)
-		response_video, err_video := call_video.Do()
-		if err_video != nil {
+		response_video, err := call_video.Do()
+		if err != nil {
 			log.Fatalf("Error making Video API call: %v", err)
 		}
 		for _, video := range response_video.Items {
@@ -61,7 +66,49 @@ func main() {
 			fmt.Println("Dislike Counts: ", video.Statistics.DislikeCount)
 		}
 
-		call_report := service.
+		// 公式ページには、Go言語でYouTube Analytics APIを利用できるサンプルが無かった。
+		// インプレッション数や視聴者の性別、トラフィック流入元などのデータを取るには Analytics APIへのアクセスが必須。
+		// ふと見つけた google.golang.org/api/youtubeanalytics/v2 が利用可能かもしれない。
+		// https://pkg.go.dev/google.golang.org/api/youtubeanalytics/v2#pkg-functions
+		// ただし公開日が2023/1/23。まだReadyじゃない？いちおうGoogleの正式なプロダクトに見える。
+		// まだ正しい使い方がわからないので、要検討。だめなら、Pythonで書き直す必要があるかも。
+		// https://developers.google.com/youtube/reporting/v1/code_samples/python
+		// 実現できる手段が無いわけではないが、Go言語で実現できるかは微妙。要検証。
+		// この資料、読んで見る価値あるかも
+		// https://blog.codecamp.jp/youtube-analytics-python
 
+		//TODO: This is draft code for YouTubeAnalitycs API with Oauth2.0
+		//client_analytics := getClient(youtubeanalytics.YtAnalyticsReadonlyScope)
+		//service_analytics, err := youtubeanalytics.New(client_analytics)
+		//if err != nil {
+		//	log.Fatalf("Error creating new YouTube service: %v", err)
+		//}
+		// 動作OK
+		//call_analytics := service_analytics.Reports.Query().Ids("channel==MINE").Dimensions("ageGroup").Metrics("viewerPercentage").StartDate("2023-01-01").EndDate("2023-02-11")
+
+		// 動作OK
+		//call_analytics := service_analytics.Reports.Query().Ids("channel==MINE").Dimensions("channel").Metrics("views,likes").StartDate("2023-01-01").EndDate("2023-02-11")
+
+		// 動作OK
+		//call_analytics := service_analytics.Reports.Query().Ids("channel==MINE").Dimensions("day").Metrics("views,likes").StartDate("2023-01-01").EndDate("2023-02-11")
+
+		// Ids("channel==MINE") は必須。
+		// Dimensions("video") がなぜが使えない。
+		// Dimensions("day")やDimensions("ageGroup")、Dimensions("channel")は使えてる。
+		// 2023/03/03 18:41:27 Error making Analytics API call: googleapi: Error 400: The query is not supported. Check the documentation at https://developers.google.com/youtube/analytics/v2/available_reports for a list of supported queries., badRequest
+
+		// 動いた！ .Sort("-views")が必須ぽい。
+		// annotationImpressions は結果が0になる。これはAPI server側ががまだ対応していないのかもしれない。なんかいろいろ制約があるようにみえるな。
+		// Note: YouTube Analytics API reports only return data for the annotationClickThroughRate and annotationCloseRate metrics as of June 10, 2012. In addition, YouTube Analytics API reports only return data for the remaining annotation metrics as of July 16, 2013.
+		// 動作OK
+
+		//TODO: This is draft code for YouTubeAnalitycs API with Oauth2.0
+		//call_analytics := service_analytics.Reports.Query().Ids("channel==MINE").Dimensions("video").Metrics("views,likes,//////annotationImpressions").StartDate("2022-01-01").EndDate("2023-02-11").MaxResults(10).Sort("-views")
+
+		//response_anlytics, err := call_analytics.Do()
+		//if err != nil {
+		//	log.Fatalf("Error making Analytics API call: %v", err)
+		//}
+		//fmt.Print(response_anlytics.Rows)
 	}
 }
