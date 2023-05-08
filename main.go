@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"time"
 
 	"github.com/joho/godotenv"
 )
@@ -13,12 +13,12 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	channel_stats := getChannelStats()
+	//channel_stats := getChannelStats()
 	startdate := "2023-03-06T00:00:00Z"
 	enddate := "2023-05-08T23:00:00Z"
 
-	video_stats := getVideoStats(startdate, enddate)
+	today := time.Now().Format("20060102")
+	video_list := getVideoStats(startdate, enddate)
 
-	fmt.Println(channel_stats)
-	fmt.Println(video_stats)
+	render_report(video_list, today)
 }

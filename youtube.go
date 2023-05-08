@@ -10,11 +10,33 @@ import (
 	"google.golang.org/api/youtube/v3"
 )
 
-func getChannelStats() map[string]string {
+type ChannelStats struct {
+	Channel_title string
+	Subscribers   string
+	Channel_id    string
+}
+
+type Video struct {
+	Video_title    string
+	Video_id       string
+	Updated_date   string
+	View_counts    uint64
+	Like_counts    uint64
+	Dislike_counts uint64
+}
+
+func reverseVideoList(v []Video) []Video {
+	for i, j := 0, len(v)-1; i < j; i, j = i+1, j-1 {
+		v[i], v[j] = v[j], v[i]
+	}
+	return v
+}
+
+func getChannelStats() ChannelStats {
 	API_KEY := os.Getenv("API_KEY")
 	CHANNEL_ID := os.Getenv("CHANNEL_ID")
 
-	channel_stats := map[string]string{}
+	var channel_stats ChannelStats
 
 	ctx := context.Background()
 	service, err := youtube.NewService(ctx, option.WithAPIKey(API_KEY))
@@ -28,10 +50,10 @@ func getChannelStats() map[string]string {
 	if err != nil {
 		log.Fatalf("Error making search API call: %v", err)
 	}
-	for _, channel := range response_channel.Items {
-		channel_stats["channnel_title"] = channel.Snippet.Title
-		channel_stats["subscribers"] = string(channel.Statistics.SubscriberCount)
-		channel_stats["channel_id"] = channel.Id
+	for _, ch := range response_channel.Items {
+		channel_stats.Channel_title = ch.Snippet.Title
+		channel_stats.Subscribers = string(ch.Statistics.SubscriberCount)
+		channel_stats.Channel_id = ch.Id
 		//fmt.Println(strings.Repeat("=", 50))
 		//fmt.Println("Channel Title: ", channel.Snippet.Title)
 		//fmt.Println("Channel ID: ", channel.Id)
@@ -41,20 +63,13 @@ func getChannelStats() map[string]string {
 	return channel_stats
 }
 
-func getVideoStats(startdate string, enddate string) []map[string]string {
+func getVideoStats(startdate string, enddate string) []Video {
 
 	API_KEY := os.Getenv("API_KEY")
 	CHANNEL_ID := os.Getenv("CHANNEL_ID")
 
-	video_stats := map[string]string{
-		"video_title":    "",
-		"video_id":       "",
-		"updated_date":   "",
-		"view_counts":    "",
-		"like_counts":    "",
-		"dislike_counts": "",
-	}
-	video_stats_list := []map[string]string{}
+	var video Video
+	var video_list []Video
 
 	ctx := context.Background()
 	service, err := youtube.NewService(ctx, option.WithAPIKey(API_KEY))
@@ -73,27 +88,19 @@ func getVideoStats(startdate string, enddate string) []map[string]string {
 	}
 
 	for _, search := range response_search.Items {
-		video_stats["video_title"] = search.Snippet.Title
-		video_stats["video_id"] = search.Id.VideoId
-		video_stats["updaded_date"] = strings.Split(search.Snippet.PublishedAt, "T")[0]
-		//fmt.Println(strings.Repeat("-", 100))
-		//fmt.Println("Video Title: ", search.Snippet.Title)
-		//fmt.Println("Video ID: ", search.Id.VideoId)
-		//fmt.Println("Uploaded Date: ", strings.Split(search.Snippet.PublishedAt, "T")[0])
+		video.Video_title = search.Snippet.Title
+		video.Video_id = search.Id.VideoId
+		video.Updated_date = strings.Split(search.Snippet.PublishedAt, "T")[0]
 
 		call_video := service.Videos.List([]string{"snippet", "contentDetails", "statistics"}).Id(search.Id.VideoId)
 		response_video, err := call_video.Do()
 		if err != nil {
 			log.Fatalf("Error making Video API call: %v", err)
 		}
-		for _, video := range response_video.Items {
-			video_stats["view_counts"] = string(video.Statistics.ViewCount)
-			video_stats["like_counts"] = string(video.Statistics.LikeCount)
-			video_stats["dislike_counts"] = string(video.Statistics.DislikeCount)
-
-			//fmt.Println("View Counts: ", video.Statistics.ViewCount)
-			//fmt.Println("Like Counts: ", video.Statistics.LikeCount)
-			//fmt.Println("Dislike Counts: ", video.Statistics.DislikeCount)
+		for _, video_stats := range response_video.Items {
+			video.View_counts = video_stats.Statistics.ViewCount
+			video.Like_counts = video_stats.Statistics.LikeCount
+			video.Dislike_counts = video_stats.Statistics.DislikeCount
 		}
 
 		// 公式ページには、Go言語でYouTube Analytics APIを利用できるサンプルが無かった。
@@ -139,10 +146,9 @@ func getVideoStats(startdate string, enddate string) []map[string]string {
 		//if err != nil {
 		//	log.Fatalf("Error making Analytics API call: %v", err)
 		//}
-		//fmt.Print(response_anlytics.Rows)
-		//print(i)
-		video_stats_list = append(video_stats_list, video_stats)
+
+		video_list = append(video_list, video)
 	}
-	//print(video_stats_list)
-	return video_stats_list
+	video_list = reverseVideoList(video_list)
+	return video_list
 }
