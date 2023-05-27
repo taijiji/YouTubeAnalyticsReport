@@ -8,6 +8,12 @@ import (
 
 func render_report(video_list []Video, date string) {
 
+	// custom logic to culuculate remainder
+	//funcMap := template.FuncMap{
+	//	"mod": func(a, b int) int {
+	//		return a % b
+	//	},
+	//}
 	tmpl, err := template.ParseFiles("templates/tmpl_report.md")
 	if err != nil {
 		fmt.Println(err)

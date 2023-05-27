@@ -1,7 +1,10 @@
 package main
 
 import (
+	"fmt"
+	"io"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 
@@ -23,6 +26,7 @@ type Video struct {
 	View_counts    uint64
 	Like_counts    uint64
 	Dislike_counts uint64
+	thumbnail_url  string
 }
 
 func reverseVideoList(v []Video) []Video {
@@ -30,6 +34,29 @@ func reverseVideoList(v []Video) []Video {
 		v[i], v[j] = v[j], v[i]
 	}
 	return v
+}
+
+func downloadImage(url string, filename string) error {
+	response, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+	defer response.Body.Close()
+
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	_, err = io.Copy(file, response.Body)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("Image downloaded successfully : " + filename)
+	return nil
+
 }
 
 func getChannelStats() ChannelStats {
@@ -91,6 +118,7 @@ func getVideoStats(startdate string, enddate string) []Video {
 		video.Video_title = search.Snippet.Title
 		video.Video_id = search.Id.VideoId
 		video.Updated_date = strings.Split(search.Snippet.PublishedAt, "T")[0]
+		video.thumbnail_url = search.Snippet.Thumbnails.High.Url
 
 		call_video := service.Videos.List([]string{"snippet", "contentDetails", "statistics"}).Id(search.Id.VideoId)
 		response_video, err := call_video.Do()
@@ -148,6 +176,9 @@ func getVideoStats(startdate string, enddate string) []Video {
 		//}
 
 		video_list = append(video_list, video)
+
+		image_name := "reports/images/thumbnail_" + video.Video_id + ".jpg"
+		downloadImage(video.thumbnail_url, image_name)
 	}
 	video_list = reverseVideoList(video_list)
 	return video_list
