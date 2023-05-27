@@ -28,6 +28,7 @@
 |||
 |---|---|
 |動画名|【JANOG51講演動画】ここがヘンだよ日本人の英語コミュニケーション 〜日本人特有の落とし穴を知り、グローバル社会でも活躍できるエンジニアになろう〜|
+|動画URL|https://www.youtube.com/watch?v=6Wrac0eR0m8|
 |動画公開日|2023-03-06|
 |サムネイル|<img src="images/thumbnail_6Wrac0eR0m8.jpg">|
 |再生回数|402|
@@ -39,6 +40,7 @@
 |||
 |---|---|
 |動画名|eSports時代に求められるネットワークの品質とは 【JANOG51解説】|
+|動画URL|https://www.youtube.com/watch?v=BgTWINTICd0|
 |動画公開日|2023-03-13|
 |サムネイル|<img src="images/thumbnail_BgTWINTICd0.jpg">|
 |再生回数|591|
@@ -50,6 +52,7 @@
 |||
 |---|---|
 |動画名|高校で必須化された新科目「情報I」について紹介します【JANOG51解説】|
+|動画URL|https://www.youtube.com/watch?v=tm1PAROz8hQ|
 |動画公開日|2023-03-20|
 |サムネイル|<img src="images/thumbnail_tm1PAROz8hQ.jpg">|
 |再生回数|257|
@@ -61,6 +64,7 @@
 |||
 |---|---|
 |動画名|【運営からのご報告】全ての動画内CMをやめることにしました|
+|動画URL|https://www.youtube.com/watch?v=UuVJhcAJm6s|
 |動画公開日|2023-03-27|
 |サムネイル|<img src="images/thumbnail_UuVJhcAJm6s.jpg">|
 |再生回数|638|
@@ -72,6 +76,7 @@
 |||
 |---|---|
 |動画名|AI時代にネットワークエンジニアの仕事はどう変わるのか【未来予測】|
+|動画URL|https://www.youtube.com/watch?v=2StmPESYmYk|
 |動画公開日|2023-04-03|
 |サムネイル|<img src="images/thumbnail_2StmPESYmYk.jpg">|
 |再生回数|792|
@@ -83,6 +88,7 @@
 |||
 |---|---|
 |動画名|ベテラン登壇者が語る「技術プレゼン」を成功させるコツ|
+|動画URL|https://www.youtube.com/watch?v=qC6lKC8Pqis|
 |動画公開日|2023-04-10|
 |サムネイル|<img src="images/thumbnail_qC6lKC8Pqis.jpg">|
 |再生回数|195|
@@ -94,6 +100,7 @@
 |||
 |---|---|
 |動画名|ITエンジニアの職種を企業ごとにざっくり分類してみた|
+|動画URL|https://www.youtube.com/watch?v=AFN41TGU0Qc|
 |動画公開日|2023-04-17|
 |サムネイル|<img src="images/thumbnail_AFN41TGU0Qc.jpg">|
 |再生回数|453|
@@ -105,6 +112,7 @@
 |||
 |---|---|
 |動画名|若手女性エンジニア 髙木萌さんに聞く「ネットワーク業界に飛び込んだきっかけ」|
+|動画URL|https://www.youtube.com/watch?v=AIzrqNrTJu0|
 |動画公開日|2023-04-24|
 |サムネイル|<img src="images/thumbnail_AIzrqNrTJu0.jpg">|
 |再生回数|731|
@@ -116,6 +124,7 @@
 |||
 |---|---|
 |動画名|ミスが多い入社３年目の若手エンジニアにおくるアドバイス|
+|動画URL|https://www.youtube.com/watch?v=hcJJ8MfwUes|
 |動画公開日|2023-05-01|
 |サムネイル|<img src="images/thumbnail_hcJJ8MfwUes.jpg">|
 |再生回数|314|
@@ -127,6 +136,7 @@
 |||
 |---|---|
 |動画名|ネットワークエンジニアの快適なリモートワーク環境に必要なもの|
+|動画URL|https://www.youtube.com/watch?v=Bg1-On1pLe0|
 |動画公開日|2023-05-08|
 |サムネイル|<img src="images/thumbnail_Bg1-On1pLe0.jpg">|
 |再生回数|602|
