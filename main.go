@@ -20,5 +20,5 @@ func main() {
 	today := time.Now().Format("20060102")
 	video_list := getVideoStats(startdate, enddate)
 
-	render_report(video_list, today)
+	render_report(today, channel_stats, video_list)
 }
