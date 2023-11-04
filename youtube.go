@@ -80,7 +80,7 @@ func getChannelStats() ChannelStats {
 	for _, ch := range response_channel.Items {
 		channel_stats.Channel_title = ch.Snippet.Title
 		channel_stats.Subscribers = string(ch.Statistics.SubscriberCount)
-		channel_stats.Channel_id = ch.Id
+		//channel_stats.Channel_id = ch.Id
 		//fmt.Println(strings.Repeat("=", 50))
 		//fmt.Println("Channel Title: ", channel.Snippet.Title)
 		//fmt.Println("Channel ID: ", channel.Id)
