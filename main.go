@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"time"
 
 	"github.com/joho/godotenv"
 )
@@ -14,11 +13,13 @@ func main() {
 	}
 
 	//channel_stats := getChannelStats()
-	startdate := "2023-07-30T00:00:00Z"
-	enddate := "2023-10-03T23:00:00Z"
+	//startdate := "2023-07-30T00:00:00Z"
+	//enddate := "2023-10-03T23:00:00Z"
 
-	today := time.Now().Format("20060102")
-	video_list := getVideoStats(startdate, enddate)
+	//today := time.Now().Format("20060102")
+	//video_list := getVideoStats(startdate, enddate)
+	video_id := "Kv_EaxHzprk"
+	getVideoAnalytics(video_id)
 
-	render_report(video_list, today)
+	//render_report(video_list, today)
 }

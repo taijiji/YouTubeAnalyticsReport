@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"golang.org/x/net/context"
+	"golang.org/x/oauth2/google"
 	"google.golang.org/api/option"
 	"google.golang.org/api/youtube/v3"
 )
@@ -90,6 +91,129 @@ func getChannelStats() ChannelStats {
 	return channel_stats
 }
 
+// Get Statics Data from YouTube Analytics API
+func getVideoAnalytics(videoId string) {
+
+	ctx := context.Background()
+	//channelID := os.Getenv("CHANNEL_ID")
+
+	// Google Cloud Platform の OAuth 2.0 クライアント ID と秘密鍵を取得する
+	//clientID := os.Getenv("GOOGLE_CLIENT_ID")
+	//clientSecret := os.Getenv("GOOGLE_CLIENT_SECRET")
+
+	//clientID := "1012177613960-l6ududdcael66n0ph7squ836tpd542oc.apps.googleusercontent.com"
+	//clientSecret := "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"
+	//
+	//// OAuth 2.0 トークンを取得する
+	//config := oauth2.Config{
+	//	ClientID:     clientID,
+	//	ClientSecret: clientSecret,
+	//	Endpoint: oauth2.Endpoint{
+	//		AuthURL:  "https://accounts.google.com/o/oauth2/auth",
+	//		TokenURL: "https://oauth2.googleapis.com/token",
+	//	},
+	//}
+
+	b, err := os.ReadFile("client_secret.json")
+	if err != nil {
+		log.Fatalf("Unable to read client secret file: %v", err)
+	}
+
+	scope := youtube.YoutubeReadonlyScope
+	config, err := google.ConfigFromJSON(b, scope)
+	if err != nil {
+		log.Fatalf("Unable to parse client secret file to config: %v", err)
+	}
+
+	fmt.Println("test00")
+	fmt.Println(config)
+
+	config.RedirectURL = "http://localhost:8090"
+
+	// 以下 oauth2.goからのコピー。
+	// cacheFile, err := tokenCacheFile()
+	// if err != nil {
+	// 	log.Fatalf("Unable to get path to cached credential file. %v", err)
+	// }
+	// token, err := tokenFromFile(cacheFile)
+	// if err != nil {
+	// 	authURL := config.AuthCodeURL("state-token", oauth2.AccessTypeOffline)
+	// 	if launchWebServer {
+	// 		fmt.Println("Trying to get token from web")
+	// 		token, err = getTokenFromWeb(config, authURL)
+	// 	} else {
+	// 		fmt.Println("Trying to get token from prompt")
+	// 		token, err = getTokenFromPrompt(config, authURL)
+	// 	}
+	// 	if err == nil {
+	// 		saveToken(cacheFile, tok)
+	// 	}
+	// }
+
+	//token, err := config.Exchange(ctx, os.Getenv("API_KEY"))
+
+	////////////////////  最新 update 2023 /12/18 ///////////////////////////////
+	// ここでエラーでてる。
+	// oauth2: cannot fetch token: 400 Bad Request
+	// Response: {
+	//   "error": "invalid_grant",
+	//   "error_description": "Malformed auth code."
+	// }
+	token, err := config.Exchange(ctx, "1012177613960-l6ududdcael66n0ph7squ836tpd542oc.apps.googleusercontent.com")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("test01")
+
+	//client := getClient(youtubeanalytics.YtAnalyticsReadonlyScope)
+	//scope := "https://www.googleapis.com/auth/yt-analytics.readonly"
+	//client := getClient(scope)
+	//service, err := youtube.New(client)
+	service, err := youtube.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, token)))
+
+	fmt.Println("test1")
+
+	//// チャンネルの統計情報を取得します。
+	//request := service.Channels.List([]string{"snippet", "contentDetails", "statistics"}).Id(channelID)
+	//response, err := request.Do()
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return
+	//}
+	//// 視聴者の年齢層を取得します。
+	//for _, item := range response.Items {
+	//	audience := item.Statistics.Audience
+	//	ageRanges := audience.AgeRanges
+	//	for _, ageRange := range ageRanges {
+	//		fmt.Println("年齢層:", ageRange.Name, ", 割合:", ageRange.Percentage)
+	//	}
+	//}
+
+	// 視聴者の年齢層のデータを取得します。
+	response, err := service.Videos.List([]string{"snippet", "contentDetails", "statistics", "topicDetails", "viewerStats"}).Id(videoId).Do()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Print(response)
+
+	fmt.Println("test2")
+
+	//for _, item := range response.Items {
+	//	fmt.Println("視聴者の年齢層:")
+	//	fmt.Println("  - 18-24歳:", item.)
+	//	fmt.Println("  - 25-34歳:", item.ViewerStats.AgeGroup25To34)
+	//	fmt.Println("  - 35-44歳:", item.ViewerStats.AgeGroup35To44)
+	//	fmt.Println("  - 45-54歳:", item.ViewerStats.AgeGroup45To54)
+	//	fmt.Println("  - 55-64歳:", item.ViewerStats.AgeGroup55To64)
+	//	fmt.Println("  - 65歳以上:", item.ViewerStats.AgeGroup65Plus)
+	//
+	//}
+
+}
+
+// Get Statics Data from YouTube Data API
 func getVideoStats(startdate string, enddate string) []Video {
 
 	API_KEY := os.Getenv("API_KEY")
