@@ -3,6 +3,10 @@
 ## 動画名
 
 
+1. [人生初の転職活動を成功させた 神谷 が伝える「エンジニア転職の最新ノウハウ」](https://www.youtube.com/watch?v=UHsWBL6ZulU) ( 2023-12-25 公開)
+
+1. [show int 応援企業に向けた報告会を開催しました](https://www.youtube.com/watch?v=EfiPKBiaQDY) ( 2023-12-31 公開)
+
 1. [【超入門2023⑥】アクセスネットワーク事業者・海底ケーブルの裏側について解説](https://www.youtube.com/watch?v=u602X43oJow) ( 2024-01-29 公開)
 
 1. [JANOG53 Meeting in 博多 現地レポート【JANOG53 前編】](https://www.youtube.com/watch?v=0GoJgfSb5N8) ( 2024-02-05 公開)
@@ -34,6 +38,30 @@
 1. [BIGLOBEがエンジニアとして「採用したい人材」とは #BIGLOBE #ISP #ネットワーク #show_int #採用](https://www.youtube.com/watch?v=88tPjnWtafs) ( 2024-03-29 公開)
 
 
+
+|||
+|---|---|
+|動画名|人生初の転職活動を成功させた 神谷 が伝える「エンジニア転職の最新ノウハウ」|
+|動画URL|https://www.youtube.com/watch?v=UHsWBL6ZulU|
+|動画公開日|2023-12-25|
+|サムネイル|<img src="images/thumbnail_UHsWBL6ZulU.jpg">|
+|再生回数|733|
+|グッド回数|22|
+|バッド回数|0|
+|||
+<div style="page-break-before:always"></div>
+
+|||
+|---|---|
+|動画名|show int 応援企業に向けた報告会を開催しました|
+|動画URL|https://www.youtube.com/watch?v=EfiPKBiaQDY|
+|動画公開日|2023-12-31|
+|サムネイル|<img src="images/thumbnail_EfiPKBiaQDY.jpg">|
+|再生回数|325|
+|グッド回数|5|
+|バッド回数|0|
+|||
+<div style="page-break-before:always"></div>
 
 |||
 |---|---|
@@ -214,4 +242,3 @@
 |バッド回数|0|
 |||
 <div style="page-break-before:always"></div>
-
