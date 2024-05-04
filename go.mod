@@ -12,10 +12,11 @@ require (
 	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	go.opencensus.io v0.24.0 // indirect
+	golang.org/x/image v0.15.0 // indirect
 	golang.org/x/net v0.5.0 // indirect
 	golang.org/x/oauth2 v0.4.0 // indirect
-	golang.org/x/sys v0.4.0 // indirect
-	golang.org/x/text v0.6.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/api v0.109.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20230119192704-9d59e20e5cd1 // indirect

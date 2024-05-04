@@ -179,6 +179,7 @@ func getVideoStats(startdate string, enddate string) []Video {
 
 		image_name := "reports/images/thumbnail_" + video.Video_id + ".jpg"
 		downloadImage(video.thumbnail_url, image_name)
+		trim_YT_Thumbnail(image_name)
 	}
 	video_list = reverseVideoList(video_list)
 	return video_list

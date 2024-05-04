@@ -25,5 +25,5 @@ Update `startdate` & `enddate` on [main.go](main.go) like this
 Run the scprits like this. 
 
 ```
-$ go run main.go oauth2.go report.go youtube.go
+$ go run main.go oauth2.go report.go youtube.go image.go
 ```
