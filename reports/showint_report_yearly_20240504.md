@@ -29,7 +29,7 @@
 |<img src="images/thumbnail_ssQo608m31o_trim.jpg">|[「EVPNマルチホーミング」から学ぶ ネットワーク機器 冗長化技術 の過去と未来【JANOG52プレゼン解説】](https://www.youtube.com/watch?v=ssQo608m31o)|2023-10-30|1064|
 |<img src="images/thumbnail_GEicptmkEZg_trim.jpg">|[技術についていけなくなる将来の不安に対するアドバイス](https://www.youtube.com/watch?v=GEicptmkEZg)|2023-11-06|868|
 |<img src="images/thumbnail_8yJnGeNNhZc_trim.jpg">|[ネットワークエンジニアの転職面接でされる質問と対策](https://www.youtube.com/watch?v=8yJnGeNNhZc)|2023-11-13|902|
-|<img src="images/thumbnail_SX7zeKzT08M_trim.jpg">|[【超入門2023④】クラウド事業者・データセンタ事業者・CDN事業者・コンテンツ事業者の違いを解説](https://www.youtube.com/watch?v=SX7zeKzT08M)|2023-11-20|903|
+|<img src="images/thumbnail_SX7zeKzT08M_trim.jpg">|[【超入門2023④】クラウド事業者・データセンタ事業者・CDN事業者・コンテンツ事業者の違いを解説](https://www.youtube.com/watch?v=SX7zeKzT08M)|2023-11-20|904|
 |<img src="images/thumbnail_t1TCyl7Xg-0_trim.jpg">|[最前線で闘うネットワークエンジニア 川上 雄也 さん #標準化 #IETF #RFC #3GPP #AI/ML【エンジニア対談】](https://www.youtube.com/watch?v=t1TCyl7Xg-0)|2023-11-27|775|
 |<img src="images/thumbnail_MaKhbTaJAyE_trim.jpg">|[【超入門2023⑤】IX・トランジット を理解するとインターネットの業界構造がみえてくる](https://www.youtube.com/watch?v=MaKhbTaJAyE)|2023-12-05|1183|
 |<img src="images/thumbnail_moUiq5xf9Q4_trim.jpg">|[Twitch 韓国からの撤退「韓国のネットワークコストが10倍」である理由](https://www.youtube.com/watch?v=moUiq5xf9Q4)|2023-12-11|1493|
