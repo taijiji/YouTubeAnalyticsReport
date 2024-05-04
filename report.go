@@ -6,7 +6,7 @@ import (
 	"text/template"
 )
 
-func render_report(video_list []Video, date string) {
+func render_report(video_list []Video, date string, yearly bool) {
 
 	// custom logic to culuculate remainder
 	//funcMap := template.FuncMap{
@@ -14,7 +14,14 @@ func render_report(video_list []Video, date string) {
 	//		return a % b
 	//	},
 	//}
-	tmpl, err := template.ParseFiles("templates/tmpl_report.md")
+	var template_filename string
+	if yearly {
+		template_filename = "templates/tmpl_report_yearly.md"
+	} else {
+		template_filename = "templates/tmpl_report.md"
+	}
+
+	tmpl, err := template.ParseFiles(template_filename)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -24,7 +31,14 @@ func render_report(video_list []Video, date string) {
 		panic(err)
 	}
 
-	f, err := os.Create("reports/showint_report_" + date + ".md")
+	var report_filename string
+	if yearly {
+		report_filename = "reports/showint_report_yearly_" + date + ".md"
+	} else {
+		report_filename = "reports/showint_report_" + date + ".md"
+	}
+
+	f, err := os.Create(report_filename)
 	if err != nil {
 		panic(err)
 	}
