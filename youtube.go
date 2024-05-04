@@ -108,7 +108,7 @@ func getVideoStats(startdate string, enddate string) []Video {
 	//client := getClient(youtube.YoutubeReadonlyScope)
 	//service, err := youtube.New(client)
 
-	call_search := service.Search.List([]string{"id", "snippet"}).ChannelId(CHANNEL_ID).Order("date").MaxResults(15).PublishedAfter(startdate).PublishedBefore(enddate)
+	call_search := service.Search.List([]string{"id", "snippet"}).ChannelId(CHANNEL_ID).Order("date").MaxResults(50).PublishedAfter(startdate).PublishedBefore(enddate)
 	response_search, err_search := call_search.Do()
 	if err_search != nil {
 		log.Fatalf("Error making search API call: %v", err_search)
